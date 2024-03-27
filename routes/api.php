@@ -27,3 +27,4 @@ Route::apiResources([
 ]);
 });
 Route::POST('/login', [AuthController::class, 'login']);
+Route::POST('/uRegister', [AuthController::class, 'register']);
