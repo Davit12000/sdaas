@@ -9,10 +9,6 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    public $service;
     use AuthorizesRequests, ValidatesRequests;
-    public function __construct(Service $service)
-    {
-        $this->service = $service;
-    }
+    
 }

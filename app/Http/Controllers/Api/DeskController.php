@@ -7,9 +7,17 @@ use App\Http\Requests\DeskStoreRequest;
 use App\Http\Resources\DeskResource;
 use App\Models\Desk;
 use App\Models\DeskList;
+use App\Models\task;
+use App\Services\Service;
 
 class DeskController extends Controller
 {
+    public $service;
+    
+    public function __construct(Service $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -53,6 +61,10 @@ class DeskController extends Controller
     {
         $oldLists = DeskList::where('desk_id', $desk->id)->get();
         foreach($oldLists as $oldList){
+            $oldTasks = task::where('desk_lists_id', $oldList->id)->get();
+            foreach($oldTasks as $oldTask){
+                $oldTask->delete();
+            };
             $oldList->delete();
         }
        $desk->delete();

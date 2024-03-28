@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\DeskController;
+use App\Http\Controllers\Api\ListController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('users', [AuthController::class, 'index']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::apiResources([
+    'lists' => ListController::class,
     'desks' => DeskController::class,
 ]);
 });
